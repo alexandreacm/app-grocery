@@ -5,7 +5,7 @@ const colors = {
   SUCCESS: '#27AE60',
   DANGER: '#EB001B',
   WARNING: '#F79E1B',
-  COLOR_WHITE: '#FFF',
+  WHITE: '#FFF',
   COLOR_GRAY: '#F3F3F3',
   COLOR_BUTTON: '#8d02c0',
 

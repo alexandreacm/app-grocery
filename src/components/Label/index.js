@@ -2,8 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
-import fontSizes from '@/theme/fonts';
-import themeColors from '@/theme/colors';
+import { theme } from '@/config';
 
 import { handlePixels } from '@/helpers/functions/utils';
 
@@ -96,9 +95,9 @@ Label.defaultProps = {
   paddingBottom: 0,
   paddingLeft: 0,
   paddingRight: 0,
-  color: themeColors.DEFAULT_TEXT,
+  color: theme.themeColors.DEFAULT_TEXT,
   fontWeight: 'normal',
-  fontSize: fontSizes.REGULAR,
+  fontSize: theme.fontSizes.REGULAR,
   textAlign: 'left',
   textDecoration: 'none',
   children: null,
