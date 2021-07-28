@@ -10,15 +10,16 @@ import spacings from '@/config/spacings';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import { StyledContainer as StyledMainContainer } from '@/helpers/commonStyles';
+
 import SliderMarketing from './SliderMarketing';
 import QuickSearch from './QuickSearch';
 import CardsAccepted from './CardsAccepted';
+import DiscountProduct from './DiscountProduct';
 
 import slider1 from '../../assets/images/sliders/slider1.jpg';
 import slider2 from '../../assets/images/sliders/slider2.png';
 import slider3 from '../../assets/images/sliders/slider3.jpg';
-
-import { StyledContainer as StyledMainContainer } from '@/helpers/commonStyles';
 
 const Home = () => {
   const { isFocused } = useIsFocused();
@@ -48,6 +49,7 @@ const Home = () => {
       <StyledMainContainer marginLeft={10} marginRight={10}>
         <StyledScrollView showsVerticalScrollIndicator={false}>
           <SliderMarketing items={images} />
+          <DiscountProduct />
           <QuickSearch />
           <CardsAccepted />
         </StyledScrollView>

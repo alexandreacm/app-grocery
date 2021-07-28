@@ -1,0 +1,28 @@
+{
+  "discountProducts": [
+    {
+      "id": 1,
+      "name": "Açucar Refinado União 1kg",
+      "image": "",
+      "price": 1.20
+    },
+    {
+      "id": 2,
+      "name": "Feijão Carioca 1kg",
+      "image": "",
+      "price": 1.40
+    },
+    {
+      "id": 3,
+      "name": "Maça pera 1kg",
+      "image": "",
+      "price": 1.60
+    },
+    {
+      "id": 4,
+      "name": "Banana",
+      "image": "",
+      "price": "1.20"
+    }
+  ]
+}

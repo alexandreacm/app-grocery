@@ -6,11 +6,13 @@ const colors = {
   DANGER: '#EB001B',
   WARNING: '#F79E1B',
   WHITE: '#FFF',
-  COLOR_WHITE: '#FFF',
   COLOR_GRAY: '#F3F3F3',
   COLOR_BUTTON: '#8d02c0',
 
-  nuPurple: '#612F74',
+  NUPURPLE: '#612F74',
+
+  LINE: '#E8E8E9',
+  LINE_MUTED: 'rgba(196, 196, 196, 0.3)',
 
   BACKDROP: 'rgba(0, 0, 0, 0.25)',
   BORDER_BOTTOM_COLOR: 'rgba(218, 218, 218, 0.4)',

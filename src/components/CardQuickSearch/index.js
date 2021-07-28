@@ -41,8 +41,8 @@ const StyledImage = styled.Image`
 `;
 
 const StyledTouchableOpacity = styled.TouchableOpacity`
-  width: 91px;
-  height: 120px;
+  width: 90px;
+  height: 130px;
   justify-content: center;
   align-items: center;
 `;

@@ -110,7 +110,7 @@ const StyledContainer = styled.View`
   align-items: center;
   padding: 25px 21px 6px 21px;
   border-radius: 16px;
-  background-color: ${colors.SURFACE};
+  background-color: ${colors.WHITE};
 `;
 
 const StyledButtonContainer = styled.View`

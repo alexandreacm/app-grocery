@@ -49,7 +49,10 @@ const NoInternet = () => {
         targetAnimation={checkMark}
       />
       {isFocused && <StatusBarColor backgroundColor={colors.PRIMARY} />}
-      <StyledMainContainer justifyContent='center'>
+      <StyledMainContainer
+        justifyContent='center'
+        backgroundColor={colors.WHITE}
+      >
         <StyledImageBackground source={imgBackGround} resizeMode='contain'>
           <StyledNoInternetImg source={signal} />
         </StyledImageBackground>

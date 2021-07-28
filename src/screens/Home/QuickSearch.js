@@ -96,10 +96,11 @@ const QuickSearch = () => {
         <Label
           width='100%'
           fontWeight={400}
-          fontSize={15}
+          fontSize={14}
           color={colors.ACTION_DANGER}
           lineHeight={20}
           marginRight={8}
+          textDecoration='underline'
         >
           Ver Todas
         </Label>
