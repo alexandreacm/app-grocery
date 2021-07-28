@@ -2,10 +2,10 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
-import { theme } from '@/config';
+import fontSizes from '@/config/fonts';
+import themeColors from '@/config/colors';
 
 import { handlePixels } from '@/helpers/functions/utils';
-
 import useFontFamily from '@/hooks/useFontFamily';
 
 const Label = ({
@@ -95,9 +95,9 @@ Label.defaultProps = {
   paddingBottom: 0,
   paddingLeft: 0,
   paddingRight: 0,
-  color: theme.themeColors.DEFAULT_TEXT,
+  color: themeColors.DEFAULT_TEXT,
   fontWeight: 'normal',
-  fontSize: theme.fontSizes.REGULAR,
+  fontSize: fontSizes.REGULAR,
   textAlign: 'left',
   textDecoration: 'none',
   children: null,

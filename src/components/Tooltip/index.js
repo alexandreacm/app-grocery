@@ -5,7 +5,8 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
 import Label from '@/components/Label';
-import { theme } from '@/config';
+import colors from '@/config/colors';
+import spacings from '@/config/spacings';
 
 const Tooltip = ({
   message,
@@ -69,11 +70,11 @@ Tooltip.defaultProps = {
   style: {},
   fontSize: 14,
   fontWeight: 400,
-  arrowPosition: theme.spacings.MEDIUM,
+  arrowPosition: spacings.MEDIUM,
   borderRadius: 30,
   elevation: 5,
-  backgroundColor: theme.colors.COLOR_WHITE,
-  color: theme.colors.DARK_TEXT
+  backgroundColor: colors.COLOR_WHITE,
+  color: colors.DARK_TEXT
 };
 
 Tooltip.propTypes = {

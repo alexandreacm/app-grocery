@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import movies, { movieState } from './movieSlice';
+import user, { userState } from './userSlice';
 
 export const globalState = {
-  movies: movieState
+  user: userState
 };
 
-export default combineReducers({ movies });
+export default combineReducers({ user });

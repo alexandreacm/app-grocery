@@ -1,19 +1,37 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { LogBox } from 'react-native';
 
-export const App = () => {
+import { Provider } from 'react-redux';
+import styled from 'styled-components/native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import store from '@/store';
+import Routes from '@/routes';
+
+import ThemeProvider from '@/components/ThemeProvider';
+
+if (__DEV__) {
+  import('@/config/reactotron');
+  LogBox.ignoreLogs(['warning']);
+  LogBox.ignoreAllLogs();
+}
+
+const App = () => {
   return (
-    <View>
-      <Icon name='arrow-left' size={24} color='#000' />
-      <StyledLabel>HOME</StyledLabel>
-    </View>
+    <Provider store={store}>
+      <ThemeProvider>
+        <NavigationContainer>
+          <StyledSafeAreaView>
+            <Routes />
+          </StyledSafeAreaView>
+        </NavigationContainer>
+      </ThemeProvider>
+    </Provider>
   );
 };
 
-const StyledLabel = styled.Text`
-  font-family: 'Poppins-ExtraBold';
-  font-size: 15px;
-  text-align: center;
+const StyledSafeAreaView = styled.SafeAreaView`
+  flex: 1;
 `;
+
+export default App;

@@ -2,7 +2,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Platform, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
-import { theme } from '@/config';
+import colors from '@/config/colors';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const styles = StyleSheet.create({
@@ -25,7 +25,7 @@ const StatusBarColor = ({ backgroundColor, isPrimaryColorDark, ...rest }) => {
 };
 
 StatusBarColor.defaultProps = {
-  backgroundColor: theme.colors.PRIMARY,
+  backgroundColor: colors.PRIMARY,
   isPrimaryColorDark: true
 };
 

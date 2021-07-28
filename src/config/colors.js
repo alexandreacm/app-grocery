@@ -1,13 +1,16 @@
 const colors = {
   // general
-  PRIMARY: '#25265E',
+  PRIMARY: '#612F74',
   SECUNDARY: '#52B297',
   SUCCESS: '#27AE60',
   DANGER: '#EB001B',
   WARNING: '#F79E1B',
   WHITE: '#FFF',
+  COLOR_WHITE: '#FFF',
   COLOR_GRAY: '#F3F3F3',
   COLOR_BUTTON: '#8d02c0',
+
+  nuPurple: '#612F74',
 
   BACKDROP: 'rgba(0, 0, 0, 0.25)',
   BORDER_BOTTOM_COLOR: 'rgba(218, 218, 218, 0.4)',

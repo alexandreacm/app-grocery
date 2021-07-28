@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider as DefaultThemeProvider } from 'styled-components/native';
 import PropTypes from 'prop-types';
 
-import { theme } from '@/config';
+import theme from '@/config';
 
 const ThemeProvider = ({ children }) => (
   <DefaultThemeProvider theme={theme}>{children}</DefaultThemeProvider>

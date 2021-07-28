@@ -13,5 +13,6 @@ module.exports = {
   trailingComma: 'none',
   useTabs: false,
   printWidth: 80,
-  endOfLine: 'auto'
+  endOfLine: 'auto',
+  jsdocParser: true
 };

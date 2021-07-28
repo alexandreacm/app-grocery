@@ -4,10 +4,11 @@ import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
-import { theme } from '@/config';
+import colors from '@/config/colors';
 import StatusBarColor from '@/config/StatusBarColor';
+import Label from '@/components/Label';
 
-import imgLogo from '@/assets/images/logo.png';
+import imgLogo from '@/assets/images/logo_50.png';
 
 const Header = ({
   showBackButton,
@@ -16,7 +17,8 @@ const Header = ({
   backgroundColor,
   backButtonColor,
   isFocused,
-  leftIcon
+  leftIcon,
+  title
 }) => {
   return (
     <>
@@ -30,16 +32,23 @@ const Header = ({
             <Icon name='arrow-back' size={26} color={backButtonColor} />
           </TouchableOpacity>
         ) : (
-          <Image source={imgLogo} width={32} height={32} />
+          <>
+            <Image source={imgLogo} width={30} height={30} />
+            <Label
+              textAlign='center'
+              fontWeight={400}
+              fontSize={14}
+              color={colors.WHITE}
+            >
+              {title}
+            </Label>
+          </>
         )}
 
         {leftIcon ? (
-          <StyledIconContainer>
-            <StyledIcon backgroundColor={backButtonColor} testID='right-icon'>
-              <Icon name='shopping-cart' size={26} color={backButtonColor} />
-            </StyledIcon>
-            <StyledIcon />
-          </StyledIconContainer>
+          <StyledIcon backgroundColor={backButtonColor} testID='right-icon'>
+            <Icon name='shopping-cart' size={26} color={backButtonColor} />
+          </StyledIcon>
         ) : (
           <StyledEmptyIcon />
         )}
@@ -62,33 +71,27 @@ const StyledSafeArea = styled.SafeAreaView`
   background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
-const StyledIconContainer = styled.TouchableOpacity`
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
 const StyledIcon = styled.TouchableOpacity`
-  width: 37px;
-  height: 37px;
+  width: 30px;
+  height: 30px;
   justify-content: center;
   align-items: center;
-  margin-right: 27px;
 `;
 
 const StyledEmptyIcon = styled.View`
-  width: 37px;
-  height: 37px;
+  width: 30px;
+  height: 30px;
 `;
 
 Header.defaultProps = {
   onBackPress: () => {},
   slim: false,
   showBackButton: false,
-  backgroundColor: theme.colors.PRIMARY,
-  backButtonColor: theme.colors.WHITE,
+  backgroundColor: colors.PRIMARY,
+  backButtonColor: colors.WHITE,
   isFocused: true,
-  leftIcon: false
+  leftIcon: false,
+  title: ''
 };
 
 Header.propTypes = {
@@ -98,7 +101,8 @@ Header.propTypes = {
   backgroundColor: PropTypes.string,
   backButtonColor: PropTypes.string,
   isFocused: PropTypes.bool,
-  leftIcon: PropTypes.bool
+  leftIcon: PropTypes.bool,
+  title: PropTypes.string
 };
 
 export default memo(Header);

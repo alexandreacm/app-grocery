@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 
 import Tooltip from '@/components/Tooltip';
 
-import { theme } from '@/config';
+import colors from '@/config/colors';
 import { runTiming, handlePixels } from '@/helpers/functions/utils';
 
 const { Value, useCode, set, Clock } = Reanimated;
@@ -128,9 +128,7 @@ const TextInput = ({
 
   return (
     <Container
-      borderColor={
-        hasError ? theme.colors.INPUT_DANGER : theme.colors.DEFAULT_TEXT
-      }
+      borderColor={hasError ? colors.INPUT_DANGER : colors.DEFAULT_TEXT}
       width={width}
       marginTop={marginTop}
       marginBottom={marginBottom}
@@ -142,8 +140,8 @@ const TextInput = ({
       paddingLeft={paddingLeft}
     >
       <Label
-        backgroundColor={theme.colors.COLOR_GRAY}
-        color={theme.colors.DEFAULT_TEXT}
+        backgroundColor={colors.WHITE}
+        color={colors.DEFAULT_TEXT}
         style={{
           top: animation.interpolate({
             inputRange: [0, 1],
@@ -188,18 +186,14 @@ const TextInput = ({
             <Icon
               name={!showPassword ? 'eye-off' : 'eye'}
               size={20}
-              color={theme.colors.SECONDARY}
+              color={colors.SECONDARY}
             />
           </TouchableOpacity>
         ) : (
           hasError &&
           errorMessage && (
             <TouchableOpacity onPress={hasError && handleTooltipState}>
-              <Icon
-                name='alert-circle'
-                size={20}
-                color={theme.colors.INPUT_DANGER}
-              />
+              <Icon name='alert-circle' size={20} color={colors.INPUT_DANGER} />
             </TouchableOpacity>
           )
         )}
@@ -215,8 +209,7 @@ const Container = styled.View`
   flex-direction: row;
   padding-left: 16px;
   padding-right: 16px;
-  border-color: ${({ borderColor }) =>
-    borderColor || theme.colors.DEFAULT_TEXT};
+  border-color: ${({ borderColor }) => borderColor || colors.DEFAULT_TEXT};
   border-radius: 8px;
   border-width: 1px;
   height: 56px;
@@ -247,7 +240,7 @@ const Label = styled(Animated.Text)`
 
 const InsideTextInput = styled.TextInput`
   font-size: 16px;
-  color: ${theme.colors.DEFAULT_TEXT};
+  color: ${colors.DEFAULT_TEXT};
   width: 90%;
 `;
 

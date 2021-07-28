@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import Label from '@/components/Label';
 
-import { theme } from '@/config';
+import colors from '@/config/colors';
 
 import { handlePixels } from '@/helpers/functions/utils';
 
@@ -107,9 +107,7 @@ const Button = ({
       backgroundColor={backgroundColor}
       color={color}
       onPress={onPress}
-      colors={
-        disabled ? theme.colors.GRADIENT_GRAY : theme.colors.GRADIENT_BADGE
-      }
+      colors={disabled ? colors.GRADIENT_GRAY : colors.GRADIENT_BADGE}
       useAngle
       angle={276}
     >
