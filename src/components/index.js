@@ -8,7 +8,7 @@ import Loading from './Loading';
 import Line from './Line';
 import Modal from './Modal';
 import Card from './Card';
-import CardDetailMovie from './CardDetailMovie';
+import CardQuickSearch from './CardQuickSearch';
 
 export {
   Tolltip,
@@ -21,5 +21,5 @@ export {
   Line,
   Modal,
   Card,
-  CardDetailMovie
+  CardQuickSearch
 };

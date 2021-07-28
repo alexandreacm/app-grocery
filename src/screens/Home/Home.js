@@ -11,10 +11,14 @@ import spacings from '@/config/spacings';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import SliderMarketing from './SliderMarketing';
+import QuickSearch from './QuickSearch';
+import CardsAccepted from './CardsAccepted';
 
 import slider1 from '../../assets/images/sliders/slider1.jpg';
 import slider2 from '../../assets/images/sliders/slider2.png';
 import slider3 from '../../assets/images/sliders/slider3.jpg';
+
+import { StyledContainer as StyledMainContainer } from '@/helpers/commonStyles';
 
 const Home = () => {
   const { isFocused } = useIsFocused();
@@ -26,24 +30,28 @@ const Home = () => {
         backgroundColor={colors.PRIMARY}
         backButtonColor={colors.COLOR_WHITE}
         isFocused={isFocused}
-        title='Super Nacional'
+        title='Rede Nacional'
         slim={false}
       />
       <StyledViewTitle>
-        <Icon name='shopping-basket' size={18} color={colors.DANGER} />
+        <Icon name='shopping-basket' size={16} color={colors.DANGER} />
         <Label
           textAlign='center'
-          fontSize={15}
-          fontWeight={500}
+          fontSize={14}
+          fontWeight={400}
           color={colors.DANGER}
           marginLeft={10}
         >
           Mercado Online
         </Label>
       </StyledViewTitle>
-      <StyledScrollView showsVerticalScrollIndicator={false}>
-        <SliderMarketing items={images} />
-      </StyledScrollView>
+      <StyledMainContainer marginLeft={10} marginRight={10}>
+        <StyledScrollView showsVerticalScrollIndicator={false}>
+          <SliderMarketing items={images} />
+          <QuickSearch />
+          <CardsAccepted />
+        </StyledScrollView>
+      </StyledMainContainer>
     </>
   );
 };
