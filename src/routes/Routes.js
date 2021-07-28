@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { createStackNavigator } from '@react-navigation/stack';
 import Credentials from '@/store/Credentials';
 
-import HomeStack from '@/routes/stacks/HomeStack';
+import SignedStack from '@/routes/stacks/SignedStack';
 import SignInRoute from '@/routes/stacks/SignInStack';
 import NoInternetScreen from '@/screens/NoInternet';
 
@@ -32,7 +32,7 @@ const Routes = () => {
     );
   }
 
-  return !signed ? <SignInRoute /> : <HomeStack />;
+  return !signed ? <SignInRoute /> : <SignedStack />;
 };
 
 export default Routes;
