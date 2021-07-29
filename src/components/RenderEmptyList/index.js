@@ -15,7 +15,7 @@ const RenderEmptyList = ({ textMessage, Icon }) => (
       textAlign='center'
       fontWeight={500}
       fontSize={18}
-      marginTop={-spacings.EXTRA_LARGE}
+      marginTop={-spacings.LARGE}
     >
       {textMessage}
     </Label>
@@ -27,14 +27,13 @@ const StyledEmptyListContainer = styled.View`
   height: 300px;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 `;
 
 const StyledLottie = styled(Lottie)`
-  height: 250px;
-  width: 250px;
-  align-self: center;
-  margin-top: -32px;
+  height: 200px;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
 `;
 
 RenderEmptyList.defaultProps = {

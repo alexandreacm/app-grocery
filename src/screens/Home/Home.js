@@ -30,7 +30,6 @@ const Home = () => {
         backgroundColor={colors.PRIMARY}
         backButtonColor={colors.COLOR_WHITE}
         isFocused={isFocused}
-        title='Rede Nacional'
         slim={false}
       />
 

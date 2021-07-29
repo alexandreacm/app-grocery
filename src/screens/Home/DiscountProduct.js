@@ -22,31 +22,51 @@ const DiscountProduct = () => {
       id: 1,
       name: 'Açucar União 1kg',
       image: acucar,
-      price: '1,20'
+      price: '1,20',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     },
     {
       id: 2,
       name: 'Feijão Carioca 1kg',
       image: feijao,
-      price: '1,45'
+      price: '1,45',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     },
     {
       id: 3,
       name: 'Maça pera 1kg',
       image: maca,
-      price: '1,20'
+      price: '1,20',
+      category: {
+        categoryId: 1,
+        categoryName: 'HortiFruti'
+      }
     },
     {
       id: 4,
       name: 'Banana',
       image: banana,
-      price: '1.70'
+      price: '1.70',
+      category: {
+        categoryId: 1,
+        categoryName: 'HortiFruti'
+      }
     },
     {
       id: 4,
       name: 'Arroz branco fino 1kg',
       image: arroz,
-      price: '1,85'
+      price: '1,85',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     }
   ]);
 

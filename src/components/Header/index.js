@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
@@ -18,8 +20,10 @@ const Header = ({
   backButtonColor,
   isFocused,
   leftIcon,
-  title
+  title,
+  countProducts
 }) => {
+  const { navigate } = useNavigation();
   return (
     <>
       <StyledSafeArea backgroundColor={backgroundColor} />
@@ -46,11 +50,41 @@ const Header = ({
         )}
 
         {leftIcon ? (
-          <StyledIcon backgroundColor={backButtonColor} testID='right-icon'>
-            <Icon name='shopping-cart' size={26} color={backButtonColor} />
-          </StyledIcon>
+          <>
+            {countProducts > 0 ? (
+              <StyledIconTouchableOpacity
+                backgroundColor={backButtonColor}
+                testID='right-icon'
+                onPress={() => {
+                  navigate('shopping-card');
+                }}
+              >
+                <Icon name='shopping-cart' size={25} color={backButtonColor} />
+                <StyledViewCountProducts>
+                  <Label
+                    textAlign='center'
+                    fontWeight={500}
+                    fontSize={13}
+                    color={colors.WHITE}
+                  >
+                    {countProducts}
+                  </Label>
+                </StyledViewCountProducts>
+              </StyledIconTouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{ width: 20 }}
+                testID='right-icon'
+                onPress={() => {
+                  navigate('shopping-card');
+                }}
+              >
+                <Icon name='shopping-cart' size={25} color={backButtonColor} />
+              </TouchableOpacity>
+            )}
+          </>
         ) : (
-          <StyledEmptyIcon />
+          <Label />
         )}
       </StyledContainer>
     </>
@@ -71,16 +105,24 @@ const StyledSafeArea = styled.SafeAreaView`
   background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
-const StyledIcon = styled.TouchableOpacity`
-  width: 30px;
-  height: 30px;
-  justify-content: center;
+const StyledIconTouchableOpacity = styled.TouchableOpacity`
+  width: 40px;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
 
-const StyledEmptyIcon = styled.View`
-  width: 30px;
-  height: 30px;
+const StyledViewCountProducts = styled.View`
+  width: 25px;
+  height: 25px;
+  border-radius: 15.5;
+  background: ${colors.DANGER};
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: 20px;
+  margin-top: -25px;
+  z-index: 9999;
 `;
 
 Header.defaultProps = {
@@ -91,7 +133,8 @@ Header.defaultProps = {
   backButtonColor: colors.WHITE,
   isFocused: true,
   leftIcon: false,
-  title: ''
+  title: 'Rede Nacional',
+  countProducts: 0
 };
 
 Header.propTypes = {
@@ -102,7 +145,8 @@ Header.propTypes = {
   backButtonColor: PropTypes.string,
   isFocused: PropTypes.bool,
   leftIcon: PropTypes.bool,
-  title: PropTypes.string
+  title: PropTypes.string,
+  countProducts: PropTypes.number
 };
 
 export default memo(Header);

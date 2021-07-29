@@ -35,7 +35,8 @@ const colors = {
   ACTION_DANGER: '#FF0000',
 
   // inputs
-  INPUT_DANGER: '#EB5757'
+  INPUT_DANGER: '#EB5757',
+  ALERT_SHOPPING_CARD: '#edb941;'
 };
 
 export default colors;
