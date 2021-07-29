@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNetInfo } from '@react-native-community/netinfo';
 import SplashScreen from 'react-native-splash-screen';
 import { createStackNavigator } from '@react-navigation/stack';
-import Credentials from '@/store/Credentials';
-
 import SignedStack from '@/routes/stacks/SignedStack';
 import SignInRoute from '@/routes/stacks/SignInStack';
 import NoInternetScreen from '@/screens/NoInternet';
 
+import useAuth from '@/hooks/useAuth';
+
 const { Navigator, Screen } = createStackNavigator();
 
 const Routes = () => {
-  const [signed, setSignet] = useState(false);
+  const { signed, userData } = useAuth();
   const { isConnected } = useNetInfo();
 
   useEffect(() => {
     SplashScreen.hide();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      setSignet(await Credentials.getAccessToken());
-    })();
   }, []);
 
   if (!isConnected && !undefined) {

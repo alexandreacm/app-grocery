@@ -133,7 +133,7 @@ Header.defaultProps = {
   backButtonColor: colors.WHITE,
   isFocused: true,
   leftIcon: false,
-  title: 'Rede Nacional',
+  title: 'Super Napoli',
   countProducts: 0
 };
 

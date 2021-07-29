@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +8,7 @@ import * as yup from 'yup';
 
 import { Label, Button, TextInput } from '@/components';
 
-import { LOGIN } from '@/store/slices/userSlice';
+import useAuth from '@/hooks/useAuth';
 
 import colors from '@/config/colors';
 
@@ -46,11 +45,10 @@ const validation = yup.object().shape({
 const logo = require('../../assets/images/logo_super.jpg');
 
 const SignIn = () => {
-  const { isLoading, errorMessage, hasError } = useSelector(({ user }) => user);
+  const { signIn, isLoading, errorMessage, hasError } = useAuth();
 
   const passwordRef = useRef(null);
   const { navigate } = useNavigation();
-  const dispatch = useDispatch();
 
   const { control, handleSubmit, errors } = useForm({
     resolver: yupResolver(validation)
@@ -62,7 +60,7 @@ const SignIn = () => {
 
   const onHandleSubmit = data => {
     const { username, password } = data;
-    dispatch(LOGIN({ username, password }));
+    signIn({ username, password });
   };
 
   const handleUsernameSubmit = () => passwordRef.current?.focus();
@@ -74,7 +72,12 @@ const SignIn = () => {
         isPrimaryColorDark={false}
       />
 
-      <StyledMainContainer justifyContent='center'>
+      <StyledMainContainer
+        justifyContent='center'
+        paddingLeft={16}
+        paddingRight={16}
+        backgroundColor={colors.WHITE}
+      >
         <StyledContainer>
           <StyledImage source={logo} width={50} height={50} />
 
@@ -164,8 +167,6 @@ export const StyledContainer = styled.View`
   background-color: ${colors.WHITE};
   justify-content: center;
   align-items: center;
-  margin-right: 8px;
-  margin-left: 8px;
 `;
 
 export const StyledForgotPasswordButton = styled.TouchableOpacity`
