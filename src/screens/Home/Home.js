@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import styled from 'styled-components/native';
 
-import Label from '@/components/Label';
 import Header from '@/components/Header';
 
 import colors from '@/config/colors';
 import spacings from '@/config/spacings';
-
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { StyledContainer as StyledMainContainer } from '@/helpers/commonStyles';
 
@@ -16,6 +13,8 @@ import SliderMarketing from './SliderMarketing';
 import QuickSearch from './QuickSearch';
 import CardsAccepted from './CardsAccepted';
 import DiscountProduct from './DiscountProduct';
+import HeaderTitle from './HeaderTitle';
+import Products from './Products';
 
 import slider1 from '../../assets/images/sliders/slider1.jpg';
 import slider2 from '../../assets/images/sliders/slider2.png';
@@ -34,21 +33,13 @@ const Home = () => {
         title='Rede Nacional'
         slim={false}
       />
-      <StyledViewTitle>
-        <Icon name='shopping-basket' size={16} color={colors.DANGER} />
-        <Label
-          textAlign='center'
-          fontSize={14}
-          fontWeight={400}
-          color={colors.DANGER}
-          marginLeft={10}
-        >
-          Mercado Online
-        </Label>
-      </StyledViewTitle>
+
+      <HeaderTitle />
+
       <StyledMainContainer marginLeft={10} marginRight={10}>
         <StyledScrollView showsVerticalScrollIndicator={false}>
           <SliderMarketing items={images} />
+          <Products />
           <DiscountProduct />
           <QuickSearch />
           <CardsAccepted />
@@ -68,16 +59,6 @@ const StyledScrollView = styled.ScrollView.attrs({
   }
 })`
   flex: 1;
-`;
-
-const StyledViewTitle = styled.View`
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5px;
-  border-bottom-width: 0.8;
-  border-bottom-color: ${colors.DANGER};
 `;
 
 export default Home;
