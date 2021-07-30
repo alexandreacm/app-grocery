@@ -36,7 +36,8 @@ const colors = {
 
   // inputs
   INPUT_DANGER: '#EB5757',
-  ALERT_SHOPPING_CARD: '#edb941;'
+  ALERT_SHOPPING_CARD: '#edb941',
+  BUTTON_ADD: '#F79E1B'
 };
 
 export default colors;

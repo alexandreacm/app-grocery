@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -21,9 +20,9 @@ const Header = ({
   isFocused,
   leftIcon,
   title,
-  countProducts
+  countProducts,
+  onOpenShoppingCard
 }) => {
-  const { navigate } = useNavigation();
   return (
     <>
       <StyledSafeArea backgroundColor={backgroundColor} />
@@ -51,13 +50,11 @@ const Header = ({
 
         {leftIcon ? (
           <>
-            {countProducts > 0 ? (
+            {countProducts ? (
               <StyledIconTouchableOpacity
                 backgroundColor={backButtonColor}
                 testID='right-icon'
-                onPress={() => {
-                  navigate('shopping-card');
-                }}
+                onPress={onOpenShoppingCard}
               >
                 <Icon name='shopping-cart' size={25} color={backButtonColor} />
                 <StyledViewCountProducts>
@@ -72,13 +69,7 @@ const Header = ({
                 </StyledViewCountProducts>
               </StyledIconTouchableOpacity>
             ) : (
-              <TouchableOpacity
-                style={{ width: 20 }}
-                testID='right-icon'
-                onPress={() => {
-                  navigate('shopping-card');
-                }}
-              >
+              <TouchableOpacity style={{ width: 20 }} testID='right-icon'>
                 <Icon name='shopping-cart' size={25} color={backButtonColor} />
               </TouchableOpacity>
             )}
@@ -115,7 +106,7 @@ const StyledIconTouchableOpacity = styled.TouchableOpacity`
 const StyledViewCountProducts = styled.View`
   width: 25px;
   height: 25px;
-  border-radius: 15.5;
+  border-radius: 15;
   background: ${colors.DANGER};
   justify-content: center;
   align-items: center;
@@ -134,7 +125,8 @@ Header.defaultProps = {
   isFocused: true,
   leftIcon: false,
   title: 'Super Napoli',
-  countProducts: 0
+  countProducts: 0,
+  onOpenShoppingCard: () => {}
 };
 
 Header.propTypes = {
@@ -146,7 +138,8 @@ Header.propTypes = {
   isFocused: PropTypes.bool,
   leftIcon: PropTypes.bool,
   title: PropTypes.string,
-  countProducts: PropTypes.number
+  countProducts: PropTypes.number,
+  onOpenShoppingCard: PropTypes.func
 };
 
 export default memo(Header);

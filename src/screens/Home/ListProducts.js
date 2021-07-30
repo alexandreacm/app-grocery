@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { memo, useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
@@ -15,7 +14,7 @@ import spacings from '@/config/spacings';
 
 import CardMovies from '@/components/Card';
 
-const List = ({ items, isLoading }) => {
+const ListProducts = ({ items, isLoading }) => {
   const { navigate } = useNavigation();
   const [moviesStorage, setMoviesStorage] = useState([]);
 
@@ -145,22 +144,21 @@ const StyledCardMovie = styled(CardMovies)`
   margin-bottom: 16px;
 `;
 
-List.defaultProps = {
+ListProducts.defaultProps = {
   items: [],
   isLoading: false
 };
 
-List.propTypes = {
+ListProducts.propTypes = {
   isLoading: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      Title: PropTypes.string,
-      Year: PropTypes.string,
-      imdbID: PropTypes.string,
-      Type: PropTypes.string,
-      Poster: PropTypes.string
+      id: PropTypes.number,
+      name: PropTypes.string,
+      image: PropTypes.node,
+      price: PropTypes.number
     })
   )
 };
 
-export default memo(List);
+export default memo(ListProducts);

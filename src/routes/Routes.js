@@ -26,7 +26,7 @@ const Routes = () => {
     );
   }
 
-  return !signed ? <SignInRoute /> : <SignedStack />;
+  return signed ? <SignInRoute /> : <SignedStack />;
 };
 
 export default Routes;

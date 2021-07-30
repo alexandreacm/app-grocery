@@ -23,20 +23,19 @@ const ShoppingCard = () => {
   const [itemsCard, setItemsCard] = useState([]);
   const { goBack } = useNavigation();
 
-  const loadItemsCard = async () => {
+  const loadItemsCard = () => {
     try {
-      const itemsStorage = await AsyncStorage.getItem(GROCERY_KEY);
-      if (itemsStorage != null && itemsStorage !== undefined)
-        setItemsCard(JSON.parse(itemsStorage));
+      AsyncStorage.getItem(GROCERY_KEY).then(itemsStorage => {
+        if (itemsStorage != null && itemsStorage !== undefined)
+          setItemsCard(JSON.parse(itemsStorage));
+      });
     } catch (error) {
       Alert.alert(error);
     }
   };
 
   useEffect(() => {
-    (async () => {
-      loadItemsCard();
-    })();
+    loadItemsCard();
   }, []);
 
   return (
@@ -54,20 +53,17 @@ const ShoppingCard = () => {
         countProducts={itemsCard.length}
       />
       <StyledMainContainer>
-        {itemsCard.length && itemsCard !== undefined ? (
-          <>
-            <StyledViewAlert>
-              <Label
-                textAlign='center'
-                fontWeight={400}
-                fontSize={14}
-                color={colors.DARK_TEXT}
-              >
-                Em 10 horas este carrinho será eszaziado
-              </Label>
-            </StyledViewAlert>
-            <Label>Items</Label>
-          </>
+        {itemsCard.length ? (
+          <StyledViewAlert>
+            <Label
+              textAlign='center'
+              fontWeight={500}
+              fontSize={13}
+              color={colors.WHITE}
+            >
+              Em 10 horas este carrinho será eszaziado
+            </Label>
+          </StyledViewAlert>
         ) : (
           <StyledRow>
             <EmptyList textMessage='Seu carrinho está vazio' />

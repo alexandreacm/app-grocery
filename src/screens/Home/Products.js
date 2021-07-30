@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
+import PropTypes from 'prop-types';
 
 import colors from '@/config/colors';
 import { Label } from '@/components';
 
 import {
   StyledContainer as StyledMainContainer,
-  StyledRow,
-  StyledCard
+  StyledRow
 } from '@/helpers/commonStyles';
 
 import arroz from '../../assets/images/arroz.jpg';
@@ -16,44 +16,69 @@ import feijao from '../../assets/images/feijao.jpeg';
 import acucar from '../../assets/images/acucar.jpg';
 import maca from '../../assets/images/maca.jpg';
 import banana from '../../assets/images/banana.jpg';
+import sal from '../../assets/images/sal.png';
 
-const Products = () => {
+const Products = ({ onHandleSaveProduct }) => {
   const [discountProducts] = useState([
     {
       id: 1,
       name: 'Açucar União 1kg',
       image: acucar,
-      price: '1,20'
+      price: '1,20',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     },
     {
       id: 2,
       name: 'Feijão Carioca 1kg',
       image: feijao,
-      price: '1,45'
+      price: '1,45',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     },
     {
       id: 3,
       name: 'Maça pera 1kg',
       image: maca,
-      price: '1,20'
+      price: '1,20',
+      category: {
+        categoryId: 1,
+        categoryName: 'HortiFruti'
+      }
     },
     {
       id: 4,
       name: 'Banana',
       image: banana,
-      price: '1.70'
+      price: '1.70',
+      category: {
+        categoryId: 1,
+        categoryName: 'HortiFruti'
+      }
     },
     {
       id: 5,
       name: 'Arroz branco fino 1kg',
       image: arroz,
-      price: '1,85'
+      price: '1,85',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     },
     {
-      id: 5,
-      name: 'Arroz integral 1kg',
-      image: arroz,
-      price: '2,85'
+      id: 6,
+      name: 'Sal tradicional 1kg',
+      image: sal,
+      price: '2,85',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
     }
   ]);
 
@@ -79,7 +104,11 @@ const Products = () => {
           R$ {item.price} /un
         </Label>
 
-        <StyledTouchableOpacity backgroundColor='#F79E1B'>
+        <StyledTouchableOpacity
+          onPress={() => {
+            onHandleSaveProduct({ item });
+          }}
+        >
           <Label
             textAlign='left'
             fontSize={12}
@@ -99,6 +128,7 @@ const Products = () => {
       <StyledRow>
         <FlatList
           data={discountProducts}
+          key={item => item.id}
           keyExtractor={item => item.id}
           numColumns={2}
           renderItem={renderItem}
@@ -140,8 +170,15 @@ const StyledTouchableOpacity = styled.TouchableOpacity`
   margin-top: 10px;
   elevation: 10;
   box-shadow: ${`0px 1px 25px ${colors.CARD_BACKGROUND_SHADOW}`};
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor || colors.COLOR_GRAY};
+  background-color: ${colors.BUTTON_ADD};
 `;
 
-export default Products;
+Products.defaultProps = {
+  onHandleSaveProduct: () => {}
+};
+
+Products.propTypes = {
+  onHandleSaveProduct: PropTypes.func
+};
+
+export default memo(Products);

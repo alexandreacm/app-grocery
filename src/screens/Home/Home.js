@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { useIsFocused } from '@react-navigation/native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Alert } from 'react-native';
 import styled from 'styled-components/native';
+
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from '@/components/Header';
 
 import colors from '@/config/colors';
 import spacings from '@/config/spacings';
+
+import { GROCERY_KEY } from '@/helpers/constants/storageKeys';
 
 import { StyledContainer as StyledMainContainer } from '@/helpers/commonStyles';
 
@@ -23,6 +28,44 @@ import slider3 from '../../assets/images/sliders/slider3.jpg';
 const Home = () => {
   const { isFocused } = useIsFocused();
   const [images] = useState([slider1, slider2, slider3]);
+  const [listProducts, setListProducts] = useState([]);
+  const { navigate } = useNavigation();
+
+  const onOpenShoppingCard = useCallback(() => {
+    navigate('shopping-card');
+  }, [navigate]);
+
+  const loadProductsStorage = useCallback(async () => {
+    try {
+      const productsStorage = await AsyncStorage.getItem(GROCERY_KEY);
+
+      if (productsStorage != null) {
+        setListProducts(JSON.parse(productsStorage));
+      }
+    } catch (error) {
+      Alert.alert(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await loadProductsStorage();
+    })();
+  }, [loadProductsStorage]);
+
+  const onHandleSaveProduct = useCallback(
+    async item => {
+      try {
+        setListProducts([...listProducts, item]);
+        await AsyncStorage.setItem(GROCERY_KEY, JSON.stringify(listProducts));
+        Alert.alert(`Item adicionado ao carrinho com sucesso`);
+      } catch (error) {
+        Alert.alert(error);
+      }
+    },
+    [listProducts]
+  );
+
   return (
     <>
       <Header
@@ -31,6 +74,8 @@ const Home = () => {
         backButtonColor={colors.COLOR_WHITE}
         isFocused={isFocused}
         slim={false}
+        countProducts={listProducts.length}
+        onOpenShoppingCard={onOpenShoppingCard}
       />
 
       <HeaderTitle />
@@ -38,7 +83,7 @@ const Home = () => {
       <StyledMainContainer marginLeft={10} marginRight={10}>
         <StyledScrollView showsVerticalScrollIndicator={false}>
           <SliderMarketing items={images} />
-          <Products />
+          <Products onHandleSaveProduct={onHandleSaveProduct} />
           <DiscountProduct />
           <QuickSearch />
           <CardsAccepted />

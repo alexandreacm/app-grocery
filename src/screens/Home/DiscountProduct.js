@@ -59,10 +59,20 @@ const DiscountProduct = () => {
       }
     },
     {
-      id: 4,
+      id: 5,
       name: 'Arroz branco fino 1kg',
       image: arroz,
       price: '1,85',
+      category: {
+        categoryId: 2,
+        categoryName: 'Alimentos'
+      }
+    },
+    {
+      id: 6,
+      name: 'Arroz integral 1kg',
+      image: arroz,
+      price: '2,85',
       category: {
         categoryId: 2,
         categoryName: 'Alimentos'
@@ -90,7 +100,7 @@ const DiscountProduct = () => {
           {discountProducts.map(item => {
             return (
               <StyledCustomCard marginLeft={8}>
-                <StyledImage source={item?.image} />
+                <StyledImage source={item?.image} resizeMode='contain' />
                 <Label
                   fontSize={12}
                   color={colors.DARK_TEXT}
@@ -110,7 +120,7 @@ const DiscountProduct = () => {
                   R$ {item.price} /un
                 </Label>
 
-                <StyledTouchableOpacity backgroundColor='#F79E1B'>
+                <StyledTouchableOpacity>
                   <Label
                     textAlign='left'
                     fontSize={12}
@@ -167,8 +177,7 @@ const StyledTouchableOpacity = styled.TouchableOpacity`
   margin-top: 10px;
   elevation: 10;
   box-shadow: ${`0px 1px 25px ${colors.CARD_BACKGROUND_SHADOW}`};
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor || colors.COLOR_GRAY};
+  background-color: ${colors.BUTTON_ADD};
 `;
 
 export default DiscountProduct;
