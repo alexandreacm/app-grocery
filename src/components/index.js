@@ -9,6 +9,7 @@ import Line from './Line';
 import Modal from './Modal';
 import Card from './Card';
 import CardQuickSearch from './CardQuickSearch';
+import Select from './Select';
 
 export {
   Tolltip,
@@ -21,5 +22,6 @@ export {
   Line,
   Modal,
   Card,
-  CardQuickSearch
+  CardQuickSearch,
+  Select
 };
