@@ -1,0 +1,9 @@
+export const PICKUP_STORE = 1;
+export const DELIVERY_HOME = 2;
+export const CREDIT_CARD = 3;
+export const DEBIT_CARD = 4;
+export const CASH = 5;
+export const FOOD_VOUCHER = 6;
+export const HEALTH_INSURANCE = 7;
+export const SIM = 8;
+export const NAO = 9;
