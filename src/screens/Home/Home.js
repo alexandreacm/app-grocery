@@ -37,6 +37,7 @@ const Home = () => {
 
   const loadProductsStorage = useCallback(async () => {
     try {
+      //await AsyncStorage.clear();
       const productsStorage = await AsyncStorage.getItem(GROCERY_KEY);
 
       if (productsStorage != null) {

@@ -13,7 +13,11 @@
 
 
 ## 💻 Project
-Application to help you make your supermarkets.
+An example of a grocery application with RN CLI, prop types, axios, react navigation and simple jest test, to help you make your supermarkets.
+
+## 💻 User Access
+- User: admin@gmail.com
+- PAssWord: 123456
 
 ## :hammer_and_wrench: Features 
 

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useCallback } from 'react';
+import React, { memo, useEffect, useState, useCallback, useMemo } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -12,6 +12,8 @@ import spacings from '@/config/spacings';
 import { Label, Select } from '@/components';
 import Header from '@/components/Header';
 import Loading from '@/components/Loading';
+
+import { maskFormatMoney } from '@/helpers/functions/masks';
 
 import {
   pickupOptions,
@@ -35,6 +37,7 @@ const ShoppingCard = () => {
   const [selectedFilter, setSelectedFilter] = useState(PICKUP_STORE);
   const [selectedFilterPayment, setSelectedFilterPayment] = useState(CASH);
   const [selectedFilterCpf, setSelectedFilterCpf] = useState(NAO);
+  const [total, setTotal] = useState(0);
 
   const onGoBack = () => goBack();
 
@@ -73,7 +76,17 @@ const ShoppingCard = () => {
                 lineHeight={20}
                 fontWeight={400}
               >
-                {item?.price}
+                {maskFormatMoney(item?.price)}
+              </Label>
+            </StyledProductPrice>
+            <StyledProductPrice>
+              <Label
+                fontSize={14}
+                color={colors.DARK_TEXT}
+                lineHeight={20}
+                fontWeight={400}
+              >
+                Quantidade items: {item?.qtd}
               </Label>
             </StyledProductPrice>
           </StyledProductName>
@@ -99,6 +112,24 @@ const ShoppingCard = () => {
   useEffect(() => {
     loadItemsCard();
   }, [loadItemsCard]);
+
+  const calculateTotalShopping = useMemo(() => {
+    try {
+      let totalAux = 0;
+
+      if (listProducts.length > 0) {
+        listProducts.map(({ item: { price, qtd } }) => {
+          totalAux += price * qtd;
+        });
+      }
+
+      setTotal(totalAux);
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+
+    return maskFormatMoney(total);
+  }, [total, listProducts]);
 
   return (
     <>
@@ -280,7 +311,7 @@ const ShoppingCard = () => {
                           lineHeight={30}
                           color={colors.DARK_TEXT}
                         >
-                          R$ 0,00
+                          {calculateTotalShopping}
                         </Label>
                       </StyledTotal>
                     </StyledContainerTotal>

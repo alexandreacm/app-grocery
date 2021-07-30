@@ -11,6 +11,8 @@ import {
   StyledRow
 } from '@/helpers/commonStyles';
 
+import { maskFormatMoney } from '@/helpers/functions/masks';
+
 import arroz from '../../assets/images/arroz.jpg';
 import feijao from '../../assets/images/feijao.jpeg';
 import acucar from '../../assets/images/acucar.jpg';
@@ -24,7 +26,8 @@ const Products = ({ onHandleSaveProduct }) => {
       id: 1,
       name: 'Açucar União 1kg',
       image: acucar,
-      price: '1,20',
+      price: '1.20',
+      qtd: 1,
       category: {
         categoryId: 2,
         categoryName: 'Alimentos'
@@ -34,7 +37,8 @@ const Products = ({ onHandleSaveProduct }) => {
       id: 2,
       name: 'Feijão Carioca 1kg',
       image: feijao,
-      price: '1,45',
+      price: '1.45',
+      qtd: 1,
       category: {
         categoryId: 2,
         categoryName: 'Alimentos'
@@ -44,7 +48,8 @@ const Products = ({ onHandleSaveProduct }) => {
       id: 3,
       name: 'Maça pera 1kg',
       image: maca,
-      price: '1,20',
+      price: '1.20',
+      qtd: 2,
       category: {
         categoryId: 1,
         categoryName: 'HortiFruti'
@@ -55,6 +60,7 @@ const Products = ({ onHandleSaveProduct }) => {
       name: 'Banana',
       image: banana,
       price: '1.70',
+      qtd: 1,
       category: {
         categoryId: 1,
         categoryName: 'HortiFruti'
@@ -64,7 +70,8 @@ const Products = ({ onHandleSaveProduct }) => {
       id: 5,
       name: 'Arroz branco fino 1kg',
       image: arroz,
-      price: '1,85',
+      price: '1.85',
+      qtd: 1,
       category: {
         categoryId: 2,
         categoryName: 'Alimentos'
@@ -74,7 +81,8 @@ const Products = ({ onHandleSaveProduct }) => {
       id: 6,
       name: 'Sal tradicional 1kg',
       image: sal,
-      price: '2,85',
+      price: '2.85',
+      qtd: 1,
       category: {
         categoryId: 2,
         categoryName: 'Alimentos'
@@ -101,7 +109,7 @@ const Products = ({ onHandleSaveProduct }) => {
           lineHeight={20}
           fontWeight={600}
         >
-          R$ {item.price} /un
+          {maskFormatMoney(item.price)} {'/un'}
         </Label>
 
         <StyledTouchableOpacity

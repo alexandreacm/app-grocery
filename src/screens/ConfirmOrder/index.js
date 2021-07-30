@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useCallback } from 'react';
+import React, { memo, useEffect, useState, useCallback, useMemo } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -18,6 +18,8 @@ import {
   StyledRow
 } from '@/helpers/commonStyles';
 
+import { maskFormatMoney } from '@/helpers/functions/masks';
+
 import EmptyList from '@/components/RenderEmptyList';
 
 const ShoppingCard = () => {
@@ -25,10 +27,29 @@ const ShoppingCard = () => {
   const [listProducts, setListProducts] = useState([]);
   const { goBack, navigate } = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
+  const [total, setTotal] = useState(0);
 
   const onGoBack = () => goBack();
 
   const OnNavigateOrders = () => navigate('finish-order');
+
+  const calculateTotalShopping = useMemo(() => {
+    try {
+      let totalAux = 0;
+
+      if (listProducts.length > 0) {
+        listProducts.map(({ item: { price, qtd } }) => {
+          totalAux += price * qtd;
+        });
+      }
+
+      setTotal(totalAux);
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+
+    return maskFormatMoney(total);
+  }, [total, listProducts]);
 
   const renderItem = ({ item }) => {
     return (
@@ -51,7 +72,17 @@ const ShoppingCard = () => {
                 lineHeight={20}
                 fontWeight={400}
               >
-                {item?.price}
+                {maskFormatMoney(item?.price)}
+              </Label>
+            </StyledProductPrice>
+            <StyledProductPrice>
+              <Label
+                fontSize={14}
+                color={colors.DARK_TEXT}
+                lineHeight={20}
+                fontWeight={400}
+              >
+                Quantidade items: {item?.qtd}
               </Label>
             </StyledProductPrice>
           </StyledProductName>
@@ -208,7 +239,7 @@ const ShoppingCard = () => {
                           lineHeight={30}
                           color={colors.DARK_TEXT}
                         >
-                          R$ 0,00
+                          {calculateTotalShopping}
                         </Label>
                       </StyledTotal>
 
