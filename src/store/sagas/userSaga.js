@@ -11,10 +11,7 @@ export function* login({ payload: { username, password } }) {
       data: { name, email }
     } = yield call(api.get, `users`);
 
-    if (
-      username === 'alexandreacm.marques@gmail.com' &&
-      password === '123456'
-    ) {
+    if (username === 'admin@gmail.com' && password === '123456') {
       const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV';
 
       const userData = {

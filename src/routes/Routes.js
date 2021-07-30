@@ -18,7 +18,7 @@ const Routes = () => {
     SplashScreen.hide();
   }, []);
 
-  if (!isConnected && !signed) {
+  if (!isConnected) {
     return (
       <Navigator headerMode='none'>
         <Screen name='NoInternet' component={NoInternetScreen} />
@@ -26,7 +26,7 @@ const Routes = () => {
     );
   }
 
-  return signed ? <SignInRoute /> : <SignedStack />;
+  return !signed ? <SignInRoute /> : <SignedStack />;
 };
 
 export default Routes;
