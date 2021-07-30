@@ -3,13 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock';
 import MockDate from 'mockdate';
 import { WebSocket } from 'mock-socket';
-
 import { globalState } from '@/store/slices';
-
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
-jest.mock(
-  '../node_modules/react-native/Libraries/EventEmitter/NativeEventEmitter'
-);
 
 jest.mock('@react-navigation/native', () => {
   const originalModule = jest.requireActual('@react-navigation/native');
@@ -21,8 +15,7 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: jest.fn(() => jest.fn),
     useRoute: () => ({
       params: {
-        id: jest.fn,
-        type: 'sales'
+        id: jest.fn
       }
     }),
     useIsFocused: jest.fn()
@@ -68,7 +61,6 @@ jest.mock('react-native-sensitive-info', () => {
 jest.mock('react-redux');
 useSelector.mockImplementation(fn => fn(globalState));
 useDispatch.mockReturnValue(jest.fn);
-
 
 // Mock WebSocket for Reactotron
 global.WebSocket = WebSocket;
