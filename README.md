@@ -53,7 +53,7 @@ Use **yarn** or **npm install** to install project dependencies.
 Then start the project.
 
 ```cl
-yarn android or npm android or react-native run-android
+yarn android or react-native run-android
 ```
 
 ## 📄 Environment
