@@ -31,9 +31,19 @@ const Header = ({
       )}
       <StyledContainer backgroundColor={backgroundColor} slim={slim}>
         {showBackButton ? (
-          <TouchableOpacity onPress={onBackPress}>
-            <Icon name='arrow-back' size={26} color={backButtonColor} />
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity onPress={onBackPress}>
+              <Icon name='arrow-back' size={26} color={backButtonColor} />
+            </TouchableOpacity>
+            <Label
+              textAlign='center'
+              fontWeight={400}
+              fontSize={14}
+              color={colors.WHITE}
+            >
+              {title}
+            </Label>
+          </>
         ) : (
           <>
             <Image source={imgLogo} width={30} height={30} />

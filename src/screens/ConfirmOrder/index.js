@@ -9,16 +9,9 @@ import { GROCERY_KEY } from '@/helpers/constants/storageKeys';
 import colors from '@/config/colors';
 import spacings from '@/config/spacings';
 
-import { Label, Select } from '@/components';
+import { Label } from '@/components';
 import Header from '@/components/Header';
 import Loading from '@/components/Loading';
-
-import {
-  pickupOptions,
-  paymentOptions,
-  cpfOptions
-} from '@/helpers/functions/utils';
-import { PICKUP_STORE, CASH, NAO } from '@/helpers/constants/common';
 
 import {
   StyledContainer as StyledMainContainer,
@@ -32,25 +25,10 @@ const ShoppingCard = () => {
   const [listProducts, setListProducts] = useState([]);
   const { goBack, navigate } = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(PICKUP_STORE);
-  const [selectedFilterPayment, setSelectedFilterPayment] = useState(CASH);
-  const [selectedFilterCpf, setSelectedFilterCpf] = useState(NAO);
 
   const onGoBack = () => goBack();
 
-  const OnNavigateOrders = () => navigate('confirm-order');
-
-  const handleSelectFilter = useCallback(valueSelected => {
-    setSelectedFilter(valueSelected);
-  }, []);
-
-  const handleSelectFilterPayment = useCallback(valueSelected => {
-    setSelectedFilterPayment(valueSelected);
-  }, []);
-
-  const handleSelectFilterCPF = useCallback(valueSelected => {
-    setSelectedFilterCpf(valueSelected);
-  }, []);
+  const OnNavigateOrders = () => navigate('finish-order');
 
   const renderItem = ({ item }) => {
     return (
@@ -108,6 +86,7 @@ const ShoppingCard = () => {
         <>
           <Header
             leftIcon
+            title='Confirmar pedido'
             showBackButton
             backgroundColor={colors.PRIMARY}
             backButtonColor={colors.COLOR_WHITE}
@@ -117,19 +96,9 @@ const ShoppingCard = () => {
             countProducts={listProducts.length}
           />
 
-          <StyledMainContainer>
+          <StyledMainContainer backgroundColor={colors.WHITE}>
             {isLoading ? (
               <>
-                <StyledViewAlert>
-                  <Label
-                    textAlign='center'
-                    fontWeight={500}
-                    fontSize={13}
-                    color={colors.DARK_TEXT}
-                  >
-                    Em 10 horas este carrinho será esvaziado
-                  </Label>
-                </StyledViewAlert>
                 <StyledScrollView>
                   <StyledMainContainer
                     paddingLeft={8}
@@ -143,86 +112,45 @@ const ShoppingCard = () => {
                       renderItem={({ item }) => renderItem(item)}
                     />
 
-                    <StyledViewFooter>
-                      <StyledTouchableHighlight onPress={onGoBack}>
+                    <StyledContainerConfirm>
+                      <StyledSubTotal>
                         <Label
                           textAlign='center'
                           fontWeight={600}
                           fontSize={14}
-                          color={colors.WHITE}
+                          color={colors.DARK_TEXT}
                         >
-                          Continuar comprando
+                          Forma Pagamento:
                         </Label>
-                      </StyledTouchableHighlight>
-                    </StyledViewFooter>
+                        <Label
+                          textAlign='center'
+                          fontWeight={400}
+                          fontSize={12}
+                          color={colors.DARK_TEXT}
+                        >
+                          Dinheiro
+                        </Label>
+                      </StyledSubTotal>
 
-                    <StyledCustomRow
-                      paddingLeft={16}
-                      paddingRight={16}
-                      marginBottom={15}
-                    >
-                      <Label
-                        textAlign='center'
-                        fontWeight={600}
-                        fontSize={14}
-                        color={colors.DARK_TEXT}
-                      >
-                        Forma de envio
-                      </Label>
-                      <StyledRow>
-                        <StyledSelect>
-                          <Select
-                            value={selectedFilter}
-                            items={pickupOptions}
-                            onValueChange={handleSelectFilter}
-                            backgroundColor={colors.WHITE}
-                            elevation={10}
-                          />
-                        </StyledSelect>
-                      </StyledRow>
-
-                      <Label
-                        textAlign='center'
-                        fontWeight={600}
-                        fontSize={14}
-                        color={colors.DARK_TEXT}
-                        marginTop={15}
-                      >
-                        Forma de pagamento
-                      </Label>
-                      <StyledRow>
-                        <StyledSelect>
-                          <Select
-                            value={selectedFilterPayment}
-                            items={paymentOptions}
-                            onValueChange={handleSelectFilterPayment}
-                            backgroundColor={colors.WHITE}
-                            elevation={10}
-                          />
-                        </StyledSelect>
-                      </StyledRow>
-
-                      <Label
-                        textAlign='center'
-                        fontWeight={600}
-                        fontSize={14}
-                        color={colors.DARK_TEXT}
-                        marginTop={15}
-                      >
-                        CPF Nota??
-                      </Label>
-                      <StyledRow>
-                        <StyledSelect>
-                          <Select
-                            value={selectedFilterCpf}
-                            items={cpfOptions}
-                            onValueChange={handleSelectFilterCPF}
-                            backgroundColor={colors.WHITE}
-                            elevation={10}
-                          />
-                        </StyledSelect>
-                      </StyledRow>
-                    </StyledCustomRow>
+                      <StyledSubTotal>
+                        <Label
+                          textAlign='center'
+                          fontWeight={600}
+                          fontSize={14}
+                          color={colors.DARK_TEXT}
+                        >
+                          CPF Nota??:
+                        </Label>
+                        <Label
+                          textAlign='center'
+                          fontWeight={400}
+                          fontSize={12}
+                          color={colors.DARK_TEXT}
+                        >
+                          Não
+                        </Label>
+                      </StyledSubTotal>
+                    </StyledContainerConfirm>
 
                     <StyledContainerTotal>
                       <StyledSubTotal>
@@ -283,18 +211,18 @@ const ShoppingCard = () => {
                           R$ 0,00
                         </Label>
                       </StyledTotal>
-                    </StyledContainerTotal>
 
-                    <StyledTouchableHighlight onPress={OnNavigateOrders}>
-                      <Label
-                        textAlign='center'
-                        fontWeight={600}
-                        fontSize={14}
-                        color={colors.WHITE}
-                      >
-                        PROSSEGUIR
-                      </Label>
-                    </StyledTouchableHighlight>
+                      <StyledTouchableHighlight onPress={OnNavigateOrders}>
+                        <Label
+                          textAlign='center'
+                          fontWeight={600}
+                          fontSize={14}
+                          color={colors.WHITE}
+                        >
+                          FINALIZAR COMPRA
+                        </Label>
+                      </StyledTouchableHighlight>
+                    </StyledContainerTotal>
                   </StyledMainContainer>
                 </StyledScrollView>
               </>
@@ -310,23 +238,12 @@ const ShoppingCard = () => {
   );
 };
 
-const StyledViewAlert = styled.View`
-  width: 100%;
-  height: 40px;
-  background: ${colors.ALERT_SHOPPING_CARD};
-  justify-content: center;
-  align-items: center;
-`;
-
 const StyledContent = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: ${colors.WHITE};
-  border-bottom-width: 1;
-  border-bottom-color: ${colors.COLOR_GRAY};
-  margin-bottom: 5px;
   padding: 10px;
 `;
 
@@ -351,10 +268,6 @@ const StyledProductPrice = styled.View`
 const StyledImage = styled.Image`
   width: 65px;
   height: 65px;
-`;
-
-const StyledSelect = styled.View`
-  flex: 1;
 `;
 
 const StyledFlatList = styled.FlatList.attrs({
@@ -383,31 +296,25 @@ const StyledTouchableHighlight = styled.TouchableOpacity`
   background: ${colors.PRIMARY};
   padding: 10px;
   border-radius: 10px;
+  margin-top: 20px;
 `;
 
-const StyledViewFooter = styled.View`
+const StyledContainerConfirm = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: ${colors.WHITE};
-`;
-
-const StyledCustomRow = styled(StyledRow)`
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   background: ${colors.WHITE};
   padding: 10px;
+  border-top-width: 1;
+  border-top-color: ${colors.LINE};
+  justify-content: center;
 `;
 
 const StyledContainerTotal = styled.View`
   flex: 1;
   background: ${colors.WHITE};
-  margin-bottom: 20px;
   padding: 10px;
+  margin-bottom: 20px;
+  border-top-width: 1;
+  border-top-color: ${colors.LINE};
 `;
 
 const StyledSubTotal = styled.View`
@@ -422,7 +329,7 @@ const StyledTotal = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 15px;
+  padding-top: 12px;
 `;
 
 export default memo(ShoppingCard);
