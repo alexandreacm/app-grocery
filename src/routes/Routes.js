@@ -11,14 +11,14 @@ import useAuth from '@/hooks/useAuth';
 const { Navigator, Screen } = createStackNavigator();
 
 const Routes = () => {
-  const { signed, userData } = useAuth();
+  const { signed } = useAuth();
   const { isConnected } = useNetInfo();
 
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
-  if (!isConnected && !undefined) {
+  if (!isConnected && !signed) {
     return (
       <Navigator headerMode='none'>
         <Screen name='NoInternet' component={NoInternetScreen} />
