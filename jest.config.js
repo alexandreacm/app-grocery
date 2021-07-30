@@ -9,7 +9,7 @@ module.exports = {
   ],
   transformIgnorePatterns: [
     //  include if necessary
-    'node_modules/(?!(jest-)?react-native|@?react-navigation||@react-native-community)'
+    'node_modules/(?!(jest-)?react-native|@react-native-community/async-storage|@?react-navigation||@react-native-community)'
   ],
   testPathIgnorePatterns: [
     //  include if necessary
